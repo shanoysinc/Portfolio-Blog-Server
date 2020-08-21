@@ -6,7 +6,7 @@ const userToken = (userId) => {
 };
 
 exports.signin = (req, res) => {
-	res.send({ welcome: "sign in" });
+	res.send({ token: userToken(req.user._id) });
 };
 
 exports.signup = async (req, res) => {
