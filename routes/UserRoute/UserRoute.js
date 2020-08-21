@@ -1,9 +1,12 @@
+require("../../services/passport");
 const express = require("express");
 const router = express.Router();
 const userController = require("../../controllers/userController/userController");
+const passport = require("passport");
+const requireAuth = passport.authenticate("jwt", { session: false });
 
-router.get("/", (req, res) => {
-	res.send("welcome home");
+router.get("/", requireAuth, (req, res) => {
+	res.send(req.user);
 });
 
 router.post("/signin", userController.signin);
