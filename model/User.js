@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const validator = require("validator");
 
 const userSchema = new mongoose.Schema({
 	name: { type: String, require: true, trim: true },
@@ -9,8 +10,14 @@ const userSchema = new mongoose.Schema({
 		trim: true,
 		unique: true,
 		lowercase: true,
+		validate: {
+			validator: (email) => {
+				return validator.isEmail(email);
+			},
+		},
 	},
 	password: { type: String, require: true, minlength: 6 },
+	blogs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Blog" }],
 });
 
 userSchema.methods.toJSON = function () {
