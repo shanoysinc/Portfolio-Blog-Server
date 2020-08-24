@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
 		},
 	},
 	password: { type: String, require: true, minlength: 6 },
-	Blog: [{ type: mongoose.Schema.Types.ObjectId, ref: "Blog" }],
+	blogs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Blog" }],
 });
 
 userSchema.methods.toJSON = function () {
