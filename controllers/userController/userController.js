@@ -8,11 +8,14 @@ const userToken = (userId) => {
 exports.userprofile = async (req, res) => {
 	try {
 		const { username } = req.params;
-		console.log(username);
 		const blog = await User.findOne({ username }).populate("blogs").exec();
+
+		if (!blog) {
+			return res.status(404).send();
+		}
 		res.send(blog);
 	} catch (err) {
-		res.send(err);
+		res.status(404).send(err);
 	}
 };
 

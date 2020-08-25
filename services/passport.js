@@ -23,6 +23,7 @@ const localLogin = new LocalStrategy(
 			if (!passwordExist) {
 				return done(null, false);
 			}
+			console.log("2", user);
 			return done(null, user);
 		} catch (err) {
 			return done(null, err);
