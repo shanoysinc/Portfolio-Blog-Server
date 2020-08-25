@@ -5,22 +5,25 @@ const userToken = (userId) => {
 	return jwt.sign({ sub: userId }, process.env.TOKEN_SECRET);
 };
 
+exports.userprofile = async (req, res) => {
+	try {
+		const { username } = req.params.username;
+		const blog = await User.findOne({ username }).populate("blogs").exec();
+		res.send(blog);
+	} catch (err) {
+		res.send(err);
+	}
+};
+
 exports.signin = (req, res) => {
 	res.send({ token: userToken(req.user._id) });
 };
 
 exports.signup = async (req, res) => {
 	try {
-		console.log(req.body);
-		const { name, email, password } = req.body;
+		const { username, email, password } = req.body;
 
-		const userExist = await User.findOne({ email });
-
-		if (userExist) {
-			return res.send("User already exist");
-		}
-
-		const newUser = new User({ email, name, password });
+		const newUser = new User({ email, username, password });
 		await newUser.save();
 		res.send({ token: userToken(newUser) });
 	} catch (err) {

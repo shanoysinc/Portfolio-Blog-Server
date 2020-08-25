@@ -1,24 +1,22 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const validator = require("validator");
+const uniqueValidator = require("mongoose-unique-validator");
 
 const userSchema = new mongoose.Schema({
-	name: { type: String, require: true, trim: true },
+	username: { type: String, require: true, trim: true, unique: true },
+	bio: { type: String, require: true, trim: true },
 	email: {
 		type: String,
 		require: true,
 		trim: true,
 		unique: true,
 		lowercase: true,
-		validate: {
-			validator: (email) => {
-				return validator.isEmail(email);
-			},
-		},
 	},
 	password: { type: String, require: true, minlength: 6 },
 	blogs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Blog" }],
 });
+
+userSchema.plugin(uniqueValidator);
 
 userSchema.methods.toJSON = function () {
 	const user = this;

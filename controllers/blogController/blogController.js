@@ -23,6 +23,7 @@ exports.getBlogs = async (req, res) => {
 		const blog = await User.findOne({ _id: req.user._id })
 			.populate("blogs")
 			.exec();
+		console.log(req.user);
 		res.send(blog);
 	} catch (err) {
 		res.send(err);
