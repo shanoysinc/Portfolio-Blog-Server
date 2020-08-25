@@ -7,7 +7,8 @@ const userToken = (userId) => {
 
 exports.userprofile = async (req, res) => {
 	try {
-		const { username } = req.params.username;
+		const { username } = req.params;
+		console.log(username);
 		const blog = await User.findOne({ username }).populate("blogs").exec();
 		res.send(blog);
 	} catch (err) {
@@ -21,9 +22,9 @@ exports.signin = (req, res) => {
 
 exports.signup = async (req, res) => {
 	try {
-		const { username, email, password } = req.body;
+		const { username, email, password, bio } = req.body;
 
-		const newUser = new User({ email, username, password });
+		const newUser = new User({ email, username, password, bio });
 		await newUser.save();
 		res.send({ token: userToken(newUser) });
 	} catch (err) {

@@ -7,7 +7,7 @@ const blogController = require("../../controllers/blogController/blogController"
 
 route.post("/createBlog", requireAuth, blogController.createBlog);
 
-route.get("/getBlogs", requireAuth, blogController.getBlogs);
+// route.get("/getBlogs", requireAuth, blogController.getBlogs);
 
 route.patch("/updateBlog/:id", requireAuth, blogController.updateBlog);
 

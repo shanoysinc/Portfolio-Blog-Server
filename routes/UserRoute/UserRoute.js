@@ -7,9 +7,9 @@ const passport = require("passport");
 const requireAuth = passport.authenticate("jwt", { session: false });
 const localLogin = passport.authenticate("local", { session: false });
 
-router.get("/user/:username", userController.userprofile);
+router.post("/", localLogin, userController.signin);
 
-router.post("/signin", localLogin, userController.signin);
+router.get("/user/:username", userController.userprofile);
 
 router.post("/signup", userController.signup);
 
