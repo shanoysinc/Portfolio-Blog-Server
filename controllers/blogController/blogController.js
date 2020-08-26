@@ -18,17 +18,16 @@ exports.createBlog = async (req, res) => {
 	}
 };
 
-// exports.getBlogs = async (req, res) => {
-// 	try {
-// 		const blog = await User.findOne({ _id: req.user._id })
-// 			.populate("blogs")
-// 			.exec();
-// 		console.log(req.user);
-// 		res.send(blog);
-// 	} catch (err) {
-// 		res.send(err);
-// 	}
-// };
+exports.getBlog = async (req, res) => {
+	try {
+		const { blogId } = req.params;
+		const blog = await Blog.findOne({ _id: blogId });
+
+		res.send(blog);
+	} catch (err) {
+		res.send(err);
+	}
+};
 
 exports.updateBlog = async (req, res) => {
 	try {

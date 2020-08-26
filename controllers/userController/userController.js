@@ -20,7 +20,7 @@ exports.userprofile = async (req, res) => {
 };
 
 exports.signin = (req, res) => {
-	res.send({ token: userToken(req.user._id) });
+	res.send({ token: userToken(req.user._id), user: req.user.username });
 };
 
 exports.signup = async (req, res) => {
