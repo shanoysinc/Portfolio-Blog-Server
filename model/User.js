@@ -28,8 +28,11 @@ userSchema.methods.toJSON = function () {
 userSchema.pre("save", async function (next) {
 	const user = this;
 
-	const hashPassword = await bcrypt.hash(user.password, 10);
-	user.password = hashPassword;
+	if (user.isModified("password")) {
+		const hashPassword = await bcrypt.hash(user.password, 10);
+		user.password = hashPassword;
+	}
+
 	return user;
 });
 

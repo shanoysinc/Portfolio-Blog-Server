@@ -34,6 +34,6 @@ exports.signup = async (req, res) => {
 		res.status(422).send(err);
 	}
 };
-exports.logout = (req, res) => {
-	res.send({ welcome: "log out" });
-};
+// exports.signout = (req, res) => {
+// 	res.send("");
+// };
