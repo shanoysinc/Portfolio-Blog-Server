@@ -18,16 +18,16 @@ exports.createBlog = async (req, res) => {
 	}
 };
 
-exports.getBlog = async (req, res) => {
-	try {
-		const { blogId } = req.params;
-		const blog = await Blog.findOne({ _id: blogId });
+// exports.getBlog = async (req, res) => {
+// 	try {
+// 		const { blogId } = req.params;
+// 		const blog = await Blog.findOne({ _id: blogId });
 
-		res.send(blog);
-	} catch (err) {
-		res.send(err);
-	}
-};
+// 		res.send(blog);
+// 	} catch (err) {
+// 		res.send(err);
+// 	}
+// };
 
 exports.updateBlog = async (req, res) => {
 	try {
