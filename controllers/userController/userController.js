@@ -25,11 +25,11 @@ exports.signin = (req, res) => {
 
 exports.signup = async (req, res) => {
 	try {
-		const { username, email, password, bio } = req.body;
+		const { username, email, password, bio, name } = req.body;
 
-		const newUser = new User({ email, username, password, bio });
+		const newUser = new User({ email, username, password, bio, name });
 		await newUser.save();
-		res.send({ token: userToken(newUser) });
+		res.send({ token: userToken(newUser._id), user: username });
 	} catch (err) {
 		res.status(422).send(err);
 	}
